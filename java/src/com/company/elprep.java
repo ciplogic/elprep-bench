@@ -76,7 +76,6 @@ public class elprep {
                 throw new RuntimeException(e);
             }
         });
-        System.exit(0);
         timedRun(timed, "Write to file.", () -> {
             try (var out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(output, "US-ASCII")))) {
                 var originalSO = filteredReads.header.getHD_SO();

@@ -36,8 +36,7 @@ There are some things to watch out for:
 - Finally, the C++ and Java versions only process the (ASCII-based) SAM format, but not the binary BAM format directly. Instead, you have to use [samtools](https://github.com/samtools/samtools) to convert from BAM to SAM, pipe the result into elPrep, and then pipe the output of elPrep into samtools to convert back into BAM format. The full invocation looks similar to this:
 
   `
-  samtools view -h -@$threads $input.bam | elprep filter /dev/stdin /dev/stdout --filter-unmapped-reads --replace-reference-sequences ucsc.hg19.dict --replace-read-group "ID:grou\
-p1 LB:lib1 PL:illumina PU:unit1 SM:sample1" --mark-duplicates --sorting-order coordinate | samtools view -b -@$threads -o $input.result.bam -                                      
+  samtools view -h -@$threads $input.bam | elprep filter /dev/stdin /dev/stdout --filter-unmapped-reads --replace-reference-sequences ucsc.hg19.dict --replace-read-group "ID:group1 LB:lib1 PL:illumina PU:unit1 SM:sample1" --mark-duplicates --sorting-order coordinate | samtools view -b -@$threads -o $input.result.bam -                                      
   `
   
   See  the [samtools manual page](https://www.htslib.org/doc/samtools.html) for details on samtools parameters.
