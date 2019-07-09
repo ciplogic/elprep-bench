@@ -21,10 +21,6 @@ public class Fields {
       out.print('\t');
       tag.write(out);
     }
-    public void formatSb (StringBuilder out) {
-      out.append('\t');
-      tag.writeSb(out);
-    }
   }
 
   public static Field assoc (List<Field> l, Slice tag) {

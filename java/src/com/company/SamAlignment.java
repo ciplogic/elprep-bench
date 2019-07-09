@@ -159,23 +159,6 @@ public class SamAlignment {
     for (var f : TAGS) {f.format(out);}
   }
 
-  public void formatSb (StringBuilder out) {
-    QNAME.writeSb(out);  out.append('\t');
-    out.append((int)FLAG); out.append('\t');
-    out.append(RNAME); out.append('\t');
-    out.append(POS); out.append('\t');
-    out.append(MAPQ); out.append('\t');
-    out.append(CIGAR); out.append('\t');
-    out.append(RNEXT); out.append('\t');
-    out.append(PNEXT); out.append('\t');
-    out.append(TLEN); out.append('\t');
-    out.append(SEQ); out.append('\t');
-    out.append(QUAL);
-
-    for (var f : TAGS) {f.formatSb(out);}
-
-  }
-
   public static short[] phredScoreTable = new short[512];
 
   static {

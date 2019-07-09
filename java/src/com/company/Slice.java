@@ -74,32 +74,29 @@ public final class Slice implements CharSequence {
   public boolean equals (Object obj) {
     if (this == obj) {
       return true;
-    }
-    if (!(obj instanceof Slice)) {
-      return false;
-    }
-    var that = (Slice)obj;
-    if ((this.storage == that.storage) &&
-        (this.pos == that.pos) &&
-        (this.length == that.length)) {
-      return true;
-    }
-    if (this.length != that.length) {
-      return false;
-    }
-    var j = that.pos;
-    for (var i = this.pos; i < this.pos+this.length; ++i, ++j) {
-      if (this.storage.charAt(i) != that.storage.charAt(j)) {
-        return false;
+    } else if (obj instanceof Slice) {
+      var that = (Slice)obj;
+      if ((this.storage == that.storage) &&
+          (this.pos == that.pos) &&
+          (this.length == that.length)) {
+        return true;
+      } else if (this.length == that.length) {
+        var j = that.pos;
+        for (var i = this.pos; i < this.pos+this.length; ++i, ++j) {
+          if (this.storage.charAt(i) != that.storage.charAt(j)) {
+            return false;
+          }
+        }
+        return true;
       }
     }
-    return true;
+    return false;
   }
   
   public int hashCode () {
     var result = 13;
     for (var i = pos; i < pos+length; ++i) {
-      result = 73*result + storage.charAt(i);
+      result = 29 * result + storage.charAt(i);
     }
     return result;
   }
@@ -117,9 +114,6 @@ public final class Slice implements CharSequence {
 
   public void write (PrintWriter out) {
     out.write(storage, pos, length);
-  }
-  public void writeSb (StringBuilder out) {
-    out.append(storage).append(pos).append(length);
   }
 
   public static boolean setUniqueEntry (Map<Slice, Slice> record, Slice key, Slice value) {
