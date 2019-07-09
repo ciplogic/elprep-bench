@@ -127,7 +127,8 @@ public class StringScanner {
   }
 
   public Field parseSamInteger (Slice tag) {
-    readUntil('\t'); return new IntegerField(tag, Integer.parseInt(sliceResult, 0, sliceResult.length(), 10));
+    var resultInt = doInt();
+    return new IntegerField(tag, resultInt);
   }
 
   public Field parseSamFloat (Slice tag) {
@@ -236,7 +237,22 @@ public class StringScanner {
   }
 
   public int doInt () {
-    doSlice(); return Integer.parseInt(sliceResult, 0, sliceResult.length(), 10);
+    var isMinus = data.charAt(pos) == '-';
+    if(isMinus){
+      pos++;
+    }
+    var result = 0;
+    while (true){
+      var ch = data.charAt(pos);
+      pos++;
+      if(ch=='\t') {
+        if (isMinus) {
+          result = -result;
+        }
+        return result;
+      }
+      result = result *10 + (ch - '0');
+    }
   }
 
   public Field parseSamAlignmentField () {

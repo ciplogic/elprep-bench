@@ -151,7 +151,7 @@ public class elprep {
                 header.format(out);
 
                 var outputStream = alnStream.parallel().map((aln) -> {
-                    var sw = new StringWriter();
+                    var sw = new StringWriter(2000);
                     try (var swout = new PrintWriter(sw)) {
                         aln.format(swout);
                     }

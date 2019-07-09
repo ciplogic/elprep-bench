@@ -96,7 +96,7 @@ public final class Slice implements CharSequence {
   public int hashCode () {
     var result = 13;
     for (var i = pos; i < pos+length; ++i) {
-      result = 29 * result + storage.charAt(i);
+      result = 73 * result + storage.charAt(i);
     }
     return result;
   }
